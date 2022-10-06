@@ -4,8 +4,26 @@ button.addEventListener('click', () => {
     let height = parseInt(document.getElementById('height').value);
     let weight = parseInt(document.getElementById('weight').value);
     let hasil = document.getElementById('hasil');
+    let height_status = false;
+    let weight_status = false;
 
-    const bmi = (weight / ((height*height)/10000)).toFixed(2);
+    if (height === ''|| isNaN(height)||(height<=0)){
+        document.getElementById('height_error').innerHTML= "Please enter your height correctly"
+    }else{
+        document.getElementById('height_error').innerHTML = '';
+        height_status = true;
+    }
+
+    if (weight ===''|| isNaN(weight)|| (weight<=0) ){
+        document.getElementById('weight_error').innerHTML = "Please enter your weight correctly"
+    }else{
+        document.getElementById('weight_error').innerHTML = '';
+        weight_status = true;
+    }
+
+
+    if (weight_status && height_status){
+        const bmi = (weight / ((height*height)/10000)).toFixed(2);
 
     if (bmi < 18.5){
         hasil.innerHTML = 'Your BMI is '+ bmi + ' which means You are Underweight'
@@ -16,4 +34,6 @@ button.addEventListener('click', () => {
     }else{
         hasil.innerHTML = 'Your BMI is '+ bmi + ' which means You are Obesity'
     }
+    }
+    
 })
